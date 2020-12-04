@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Feather';
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Button } from 'react-native';
 
@@ -6,6 +7,7 @@ import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
 import perfilAvatar from '../../assets/perfil.png';
+import providerAvatar from '../../assets/provider.png';
 
 import {
   Container,
@@ -15,6 +17,15 @@ import {
   ProfileButton,
   UserAvatar,
   ProvidersList,
+  ProvidersListTitle,
+  ProviderContainer,
+  ProviderAvatar,
+  ProviderInfo,
+  ProviderName,
+  ProviderMeta,
+  ProviderMetaText,
+  LogOutButton,
+  LogOutButtonText,
 } from './styles';
 
 export interface Provider {
@@ -57,8 +68,32 @@ const Dashboard: React.FC = () => {
       <ProvidersList
         data={providers}
         keyExtractor={provider => provider.id}
-        renderItem={({ item }) => <UserName>{item.name}</UserName>}
+        ListHeaderComponent={
+          <ProvidersListTitle>Psicólogos disponíveis:</ProvidersListTitle>
+        }
+        renderItem={({ item: provider }) => (
+          <ProviderContainer onPress={() => {}}>
+            <ProviderAvatar source={providerAvatar} />
+
+            <ProviderInfo>
+              <ProviderName>{provider.name}</ProviderName>
+
+              <ProviderMeta>
+                <Icon name="calendar" size={14} color="#d864bb" />
+                <ProviderMetaText>Segunda à sexta</ProviderMetaText>
+              </ProviderMeta>
+
+              <ProviderMeta>
+                <Icon name="clock" size={14} color="#d864bb" />
+                <ProviderMetaText>8h às 18h</ProviderMetaText>
+              </ProviderMeta>
+            </ProviderInfo>
+          </ProviderContainer>
+        )}
       />
+      <LogOutButton onPress={signOut}>
+        <LogOutButtonText>Sair</LogOutButtonText>
+      </LogOutButton>
     </Container>
   );
 };
