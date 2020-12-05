@@ -1,6 +1,6 @@
 
 <h3 align="center">
-  Sistema Anamnese APP Senac-DF API
+  Sistema Anamnese APP Senac-DF
 </h3>
 
 <p align="center">
